@@ -2,35 +2,35 @@
 
 set -e
 
-usage() {
-	echo "usage: pure-func (-l|-x)"
-	exit 255
-}
+#usage() {
+#	echo "usage: pure-func (-l|-x)"
+#	exit 255
+#}
 
 # ensure that we get exactly one argument
-if [ -z "$1" ] || [ -n "$2" ]
-then
-	usage
-fi
+#if [ -z "$1" ] || [ -n "$2" ]
+#then
+#	usage
+#fi
 
-WARNS=$(grep "warning: function might be candidate for attribute 'pure'" <&0 \
-	| cut -s -d':' -f1,2)
+grep "warning: function might be candidate for attribute 'pure'" <&0 \
+	| cut -s -d':' -f1,2
 
-case $1 in
-	'-l')
-		echo "$WARNS"
-		;;
-	'-x')
-		echo "ex"
-		;;
-	*)
-		usage
-		;;
-esac
+# for now, we don't try printing the actual function definitions
 
-# now-unused code that finds and ctags all C files in the given directory
-#
 #FILES=$(find . -name \*.c -print0 \
 #	| xargs -0 ctags -x \
 #	| awk '{print $3, "\t", $2, "\t", $1}' \
 #	| sort)
+
+#case $1 in
+#	'-l')
+#		echo "$WARNS"
+#		;;
+#	'-x')
+#		echo "ex"
+#		;;
+#	*)
+#		usage
+#		;;
+#esac
