@@ -16,8 +16,6 @@ fi
 WARNS=$(grep "warning: function might be candidate for attribute 'pure'" <&0 \
 	| cut -s -d':' -f1,2)
 
-echo "$WARNS"
-
 case $1 in
 	'-l')
 		echo "$WARNS"
