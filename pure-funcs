@@ -13,9 +13,14 @@ then
 	usage
 fi
 
+WARNS=$(grep "warning: function might be candidate for attribute 'pure'" <&0 \
+	| cut -s -d':' -f1,2)
+
+echo "$WARNS"
+
 case $1 in
 	'-l')
-		echo "el"
+		echo "$WARNS"
 		;;
 	'-x')
 		echo "ex"
@@ -25,8 +30,9 @@ case $1 in
 		;;
 esac
 
-find . -name \*.c -print0 \
-	| xargs -0 ctags -x \
-	| awk '{print $3, "\t", $2, "\t", $1}' \
-	| sort
-#| cut -d' ' -f1,2,3 -s
+# now-unused code that finds and ctags all C files in the given directory
+#
+#FILES=$(find . -name \*.c -print0 \
+#	| xargs -0 ctags -x \
+#	| awk '{print $3, "\t", $2, "\t", $1}' \
+#	| sort)
